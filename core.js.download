@@ -1,0 +1,300 @@
+
+
+function notifyResult(name, alertMsg) {
+  // Let's check if the browser supports notifications
+  if (!("Notification" in window)) {
+    alert("This browser does not support desktop notification");
+  }
+
+  // Let's check whether notification permissions have already been granted
+  else if (Notification.permission === "granted") {
+    // If it's okay let's create a notification
+    var notification = new Notification("Hi " + name,{
+        lang: "en",
+        body: alertMsg,
+        icon: "./img/muhammed.jpg",
+        // tag: "notify_1"
+    });
+  }
+
+
+  // Otherwise, we need to ask the user for permission
+  else if (Notification.permission !== 'denied') {
+    Notification.requestPermission(function (permission) {
+      // If the user accepts, let's create a notification
+      if (permission === "granted") {
+        var notification = new Notification("Hi " + name,{
+            lang: "en",
+            body: alertMsg,
+            icon: "./img/muhammed.jpg",
+            // tag: "notify_1"
+        });
+      }
+    });
+  }
+
+  // At last, if the user has denied notifications, and you 
+  // want to be respectful there is no need to bother them any more.
+}
+
+function submitForm () {
+  var name = document.getElementById("name"),
+      email = document.getElementById("email"),
+      comment = document.getElementById("comment");
+  var data = JSON.stringify({name: name.value, email: email.value, comment: comment.value});
+  var xhttp = new XMLHttpRequest();
+  xhttp.open("POST", "sendmail.php", true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send(data);
+  xhttp.onreadystatechange = function(){
+      if (xhttp.readyState == 4 && xhttp.status == 200){
+        var mailResult = JSON.parse(xhttp.response);
+        if (mailResult.success){
+          notifyResult(name.value, mailResult.result);
+          name.value = "";
+          email.value = "";
+          comment.value = "";
+        }
+      }
+  };
+}
+function initialize() {
+    var myLatlng = new google.maps.LatLng(52.522756, 13.392999);
+    var mapOptions = {
+        zoom: 14,
+        center: myLatlng,
+        disableDefaultUI: false,
+        mapTypeControl: false,
+        disableDoubleClickZoom: true,
+        scrollwheel: false,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        styles: [{
+            stylers: [{
+                hue: "#E16D65"
+            }, {
+                saturation: -40
+            }]
+            }, {
+                elementType: "geometry",
+                stylers: [{
+                    lightness: 0
+                }, {
+                    visibility: "simplified"
+                }]
+            }, {
+              featureType: "landscape",
+                stylers: [{
+                  lightness: 100
+                }]
+            }, {
+                    featureType: "road",
+                    elementType: "labels",
+                    stylers: [{
+                        visibility: "off"
+                    }]
+                },{
+                  featureType: "road.arterial",
+                  elementType: "geometry.fill",
+                  stylers: [{
+                    color: "#E16D65",
+                  }]
+                },{
+                  featureType: "road.local",
+                  stylers: [
+                    { color: "#ff8c86" },
+                    { lightness: 75 }
+                  ]
+                },{
+                featureType: "administrative.locality",
+                elementType: "labels.text",
+                stylers: [
+                  { color: "#666666" },
+                  { weight: 0.4 }
+                ]
+            },{
+              featureType: "poi.park",
+              stylers: [
+                    { lightness: 100 }
+              ]
+            }
+        ]};
+    var map = new google.maps.Map(document.getElementById("my-map"), mapOptions);
+    map.panBy(-150, 50);
+    /*var marker = new google.maps.Marker({
+        position: myLatlng,
+        map: map
+    });*/
+    google.maps.event.addDomListener(window, 'scroll', function () {
+        var scrollY = window.scrollY,
+            scroll = map.get('scroll');
+        if (scroll) {
+            map.panBy(0, -((scrollY - scroll.y) / 2));
+        }
+        map.set('scroll', {
+            y: scrollY
+        });
+    });
+    google.maps.event.addDomListener(window, "resize", function() {
+        var center = map.getCenter();
+        google.maps.event.trigger(map, "resize");
+        map.setCenter(center);
+    });
+}
+var portfolioPath = window.location.pathname;
+if (portfolioPath == "/portfolio.php") {
+var player = document.getElementById('kuttuplayer');
+var playButton = document.getElementById('playpause');
+var playedbar = document.getElementById('played');
+var volumeBar = document.getElementById('volumenow');
+var sControl = document.getElementById('seekbar');
+// var vControl = document.getElementById("volumeposition");
+var vControl = document.getElementById("voumecontrol");
+var volumeIcon = document.getElementById("speaker");
+var fullScreenStatus = false;
+
+// screen click
+player.onclick = function(){
+	playme();
+};
+// play and pause
+playButton.onclick = function(){
+	playme();
+};
+// set time and volume when player loaded
+player.addEventListener('loadedmetadata', function() {
+  document.getElementById('total-time').innerHTML = timeFormat(player.duration);
+  volumeBar.style.height = (player.volume * 100)+"%";
+});
+// update time and seekbar when playing
+player.addEventListener("timeupdate", function () {
+	document.getElementById('playing-time').innerHTML = timeFormat(player.currentTime);
+	playedbar.style.width = per(player.currentTime,player.duration) + "%";
+});
+// change volume
+player.addEventListener("volumechange", function(){
+  volumeBar.style.height = player.volume * 100 + "%";
+  if (player.muted){
+    volumeBar.style.height = 0;
+  }
+});
+// Seek bar
+var seekBarMove = function (e){
+  var offsetValue = offsetMesure(sControl);
+  var seekPosition = e.pageX - offsetValue.left;
+  playedbar.style.width = per(seekPosition,sControl.offsetWidth)+"%";
+  player.currentTime = (player.duration * seekPosition ) / sControl.offsetWidth;
+};
+sControl.onmousedown = function(e){
+  seekBarMove(e);
+  sControl.onmousemove = seekBarMove;
+  sControl.onmouseup = function(e){
+    sControl.onmousemove = null;
+  };
+};
+
+// volume speaker icon
+var speakerChange = function(vResult) {
+    if (vResult > 60){
+      volumeIcon.className = "icon speaker volume-max";
+    } else if(vResult > 30){
+      volumeIcon.className = "icon speaker volume-mid";
+    } else if(vResult == 0){
+      volumeIcon.className = "icon speaker mute";
+      player.muted = true;
+    } else{
+      volumeIcon.className = "icon speaker volume-min";
+    }
+};
+// Volume Control
+var mousemovemethod = function (e) {
+  var offsetValue = offsetMesure(vControl);
+  var volumePer = Math.abs((e.pageY - (offsetValue.top + vControl.offsetHeight)) / vControl.offsetHeight);
+  player.volume = volumePer;
+  volumePer =  volumePer * 100;
+  player.muted = false;
+  volumeBar.style.height = volumePer + "%";
+  speakerChange(volumePer);
+};
+vControl.onmousedown = function (e) {
+    mousemovemethod(e);
+    vControl.onmousemove = mousemovemethod;
+    vControl.onmouseup = function (e) {
+        vControl.onmousemove = null;
+    };
+};
+// play button reset once completed playing
+player.addEventListener("ended", function () {
+  playButton.className = "icon play";
+});
+// player pause and play
+function playme() {
+	if (player.paused){
+		player.play();
+		playButton.className = "icon pause";
+	}else{
+		player.pause();
+		playButton.className = "icon play";
+	}
+}
+// Mute volume
+function muteme(volueStatus){
+  if(player.muted){
+    volueStatus.className = "icon speaker volume-max";
+    player.muted = false;
+  }else{
+    volueStatus.className = "icon speaker volume-mute";
+    player.muted = true;
+  }
+}
+// fullscreen and back to screen
+document.getElementById('fullscreen').onclick = function(argument){
+  if (fullScreenStatus) {
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+    } else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+    } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
+    }
+    fullScreenStatus = false;
+    this.className = "icon tofullscreen";
+  }else{
+    if (player.requestFullscreen) {
+        player.requestFullscreen();
+    } else if (player.webkitRequestFullscreen) {
+        player.webkitRequestFullscreen();
+    } else if (player.mozRequestFullScreen) {
+        player.mozRequestFullScreen();
+    } else if (player.msRequestFullscreen) {
+        player.msRequestFullscreen();
+    }
+    fullScreenStatus = true;
+    this.className = "icon toscreen";
+  }
+};
+
+// messure ofset value
+function offsetMesure(elem) {
+  if(!elem) elem = this;
+  var x = elem.offsetLeft;
+  var y = elem.offsetTop;
+  while (elem = elem.offsetParent) {
+    x += elem.offsetLeft;
+    y += elem.offsetTop;
+  }
+  return { left: x, top: y };
+}
+// percentage in two digit
+function per(num, amount){
+  return (num/amount*100).toFixed(2);
+}
+// video to time format
+var timeFormat=function(seconds){
+  var m=Math.floor(seconds/60)<10?"0"+Math.floor(seconds/60):Math.floor(seconds/60);
+  var s=Math.floor(seconds-(m*60))<10?"0"+Math.floor(seconds-(m*60)):Math.floor(seconds-(m*60));
+  return m+":"+s;
+};
+
+};
