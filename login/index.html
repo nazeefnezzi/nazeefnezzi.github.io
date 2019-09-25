@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login_form</title>
+    <link rel="stylesheet" href="log.css">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
+</head>
+<body>
+    <form action="index.html" class="login_form">
+        <h1>Login Please!</h1>
+        <div class="txtb">
+            <input type="text">
+            <span data-placeholder="Username"></span>
+        </div>
+        <div class="txtb">
+            <input type="password">
+            <span data-placeholder="password"></span>
+        </div>
+        <input type="submit" class="logbtn" value="Login">
+        <div class="btm_text">
+            New User? <a href="#">Sign Up</a><br>
+            
+        </div>
+
+        <div class="btm_text2">
+            
+            Forget Password?<a href="#">Here</a>
+        </div>
+
+    </form>
+
+   <script type="text/javascript">
+   $(".txtb input").on("focus",function(){
+       $(this).addClass("focus");
+   });
+
+   $(".txtb input").on("blur",function(){
+       if($(this).val()=="")
+       $(this).removeClass("focus");
+   });
+   
+   </script>
+</body>
+</html>
