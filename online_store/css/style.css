@@ -1,0 +1,186 @@
+/*importing some fonts*/
+@import url('https://fonts.googleapis.com/css?family=Cairo|Indie+Flower|Josefin+Sans|Lobster|Ubuntu&display=swap');
+
+/*
+font-family: 'Ubuntu', sans-serif;
+font-family: 'Josefin Sans', sans-serif;
+font-family: 'Indie Flower', cursive;
+font-family: 'Lobster', cursive;
+font-family: 'Cairo', sans-serif;
+*/
+
+:root{
+    --primary-color:#003366;
+    --light-gray:#595959;
+    --border:#2b303218; 
+    --text-color:#cca300;
+    --ubuntu:'Ubuntu', sans-serif;
+    --lobster:'Lobster', cursive;
+    --josefin:'Josefin Sans', sans-serif;
+    --cairo: 'Cairo', sans-serif;
+
+
+}
+
+.primary-color{
+    color: var(--primary-color);
+}
+.bg-primary-color{
+    background-color: var(--primary-color) !important;
+
+}
+.text-color{
+    color: var(--text-color);
+}
+
+.font-ubuntu{
+    font-family: var(--ubuntu);
+}
+.font-lobster{
+    font-family: var(--lobster);
+}
+.lightblue{
+    color: lightblue;
+}
+
+header{
+   background-color:var(--primary-color); 
+   font-family: var(--ubuntu); 
+}
+
+header .site-title{
+    font-family: var(--lobster);
+
+}
+
+.container .dropdown-toggle,
+.container .dropdown-item{
+    font-size: 0.7em;
+    
+
+}
+
+.header-links a{
+    font-size: 0.9em;
+    text-decoration: none;
+    font-weight: bold;
+    color: white; 
+}
+
+/*navbar style*/
+.navbar-nav{
+
+    padding: 0.8em 0em;
+
+}
+
+.navbar-nav .nav-link{
+    font-size: 0.9em;
+    color: var(--primary-color)!important;
+}
+
+.navbar-nav .nav-item .nav-link{
+    padding: 01.3em;
+}
+
+
+/*slider one*/
+
+.site-slider{
+    position: relative;
+}
+
+.position-top{
+    position: absolute;
+    top:50%;
+}
+
+.site-slider .slider-btn .prev,
+.site-slider .slider-btn .next{
+    background-color: var(--primary-color);
+    padding: 1rem 1.5rem;
+    border-radius: 10rem;
+    color: var(--text-color);
+    margin: 0.1rem;
+    opacity: 0;
+    transition: opacity is ease;
+
+
+}
+
+.site-slider:hover .slider-btn .prev,
+.site-slider:hover .slider-btn .next{
+    opacity: 1;
+}
+
+.right-0{
+    right:0;
+}
+
+/*slick dots*/
+
+.slick-dots{
+    display:flex;
+    justify-content: center;
+    margin: 0;
+    padding: 1rem 0;
+    list-style-type:none ;
+    position: absolute;
+    bottom: 0;
+    right: 50%;
+}
+
+.slick-dots li{
+    margin: 0 0.6rem;
+}
+
+.slick-dots button{
+    display: block;
+    width:0.5rem;
+    height:0.5rem;
+    padding:0;
+    border: none;
+    background-color:var(--primary-color);
+    text-indent: -99999px;
+    border-radius: 100%;
+
+}
+
+.slick-dots li.slick-active button{
+    transform: scale(2.5);
+    box-shadow: 0px 3px 5px 1px rgba(0, 0, 0,0.205);
+    
+}
+
+/*second slider*/
+
+.site-slider-two{
+    position: relative;
+    height: 30%;
+}
+
+.site-slider-two .product{
+    height: 25rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.site-slider-two .product img{
+    width:90%;
+    margin: auto;
+}
+
+.site-btn .bts-span{
+    padding:0.8rem 0.9rem;
+    border-radius: 4rem;
+    border: 1px solid var(--border);
+    background-color: white;
+    color: var(--light-gray);
+
+}
+
+.slider-two .slick-track .product:hover span{
+    background-color: var(--primary-color);
+
+
+}
