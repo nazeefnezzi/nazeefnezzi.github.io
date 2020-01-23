@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/894c4fadf2.js" crossorigin="anonymous"></script>
+    <title>E_store</title>
+    
+    <!--costomised css-->
+    <link rel="stylesheet" href="./styles/carousel.css">
+    <link rel="stylesheet" href="./styles/style.css">
+
+</head>
+<body onload="render()">
+    <header>
+        <nav class="navbar navbar-light bg-success text-white">
+            <a class="navbar-brand text-white" href="#">
+                <i class="fas fa-cubes"></i>
+
+                Quick e-store
+            </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                  <li class="nav-item active">
+                    <a class="nav-link" href="#">
+                        Home 
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        Products
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        About & Contact
+                    </a>
+                  </li>
+                </ul>
+                <form class="form-inline mt-2 mt-md-0">
+                    <a class="text-warning nav-link" href="cart.html">
+                        <i class="fas fa-cart-plus"></i>
+                        Your order
+                    </a>
+                    <a class="nav-link disabled"
+                    href="admin.html">Admin</a>
+                </form>
+              </div>
+          </nav>
+        
+    </header>
+
+    <main role="main">
+        <div id="myCarousel"
+        class="carousel slide"
+        data-ride = "carousel">
+
+            <ol class="carousel-indicators">
+                <li style="z-index:102;" data-target="#myCarousel"
+                data-slide-to="0"
+                class="active"></li>
+
+                <li style="z-index:102;" data-target="#myCarousel"
+                data-slide-to="1">
+                </li>
+
+                <li style="z-index:102;" data-target="#myCarousel"
+                data-slide-to="2">
+                </li>
+
+            </ol>
+
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="imgFilter first-slide" 
+                    src="./imges/carousels/c4.jpg" alt="Slide One">
+                    <div class="container">
+                        <div class="carousel-caption">
+                           <h2 class="text-white bg-dark">Computers, Mobiles and Accessories...</h2>
+                           <p class="text-dark"> WE are here to reaching to you through our online platform... MAKE IT EASY .. </p>
+                           <p><a role="button"
+                            class="btn btn-danger btn-lg" href="#">Read Info</a></p> 
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <img class="imgFilter second-slide" 
+                    src="./imges/carousels/c1.jpg" alt="Slide Two">
+                    <div class="container">
+                        <div class="carousel-caption">
+                           <h2 class="text-success"></h2>
+                           <p class="bg-dark"> </p>
+                           <p><a role="button"
+                            class="btn btn-danger btn-lg" href="#">Read Info</a></p> 
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <img class="imgFilter third-slide" 
+                    src="./imges/carousels/c3.jpg" alt="Slide Three">
+                    <div class="container">
+                        <div class="carousel-caption">
+                           <h2 class="text-success"></h2>
+                           <p class="bg-dark"> </p>
+                           <p><a role="button"
+                            class="btn btn-danger btn-lg" href="#">Read Info</a></p> 
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <a style="z-index: 101;"
+            class="carousel-control-prev"
+            role="button" data-slide="prev" href="#myCarousel">
+                <span class="carousel-control-prev-icon"
+                aria-hidden="true"> </span>
+                <span class="sr-only">Previus</span>
+            </a>
+
+            <a style="z-index: 101;"
+            class="carousel-control-next"
+            role="button" data-slide="next" href="#myCarousel">
+                <span class="carousel-control-next-icon"
+                aria-hidden="true"> </span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+
+        <!--marketing container-->
+        <div class="container marketing">
+            <br>
+            <h2 id="computers">Computers</h2>
+            <hr>
+            <div class="row" id="computersDiv">
+            </div>
+
+            <h2 id="Phones">Phones</h2>
+            <hr>
+            <div class="row" id="PhonesDiv">
+            </div>
+
+            <h2 id="accessories">Accessories
+            </h2>
+            <hr>
+            <div class="row" id="accessoriesDiv">
+            </div>
+            <hr class="featurette-divider">
+
+        </div>
+
+        <!--footer-->
+        <footer class="container">
+            <p class="float-right">
+                <a href="#">TOP</a>
+            </p>
+            <div class="row">
+                &copy Naz Developers(2018)
+            </div>
+        </footer>
+
+
+
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <!--sweetalertjs-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.7.0/dist/sweetalert2.all.min.js"></script>
+
+    <!--costamized JS-->
+
+    
+    <script src="./JS/main.js"></script>
+
+    <!--firebase script-->
+<script src="/__/firebase/7.6.2/firebase-app.js"></script>
+<!-- Initialize Firebase -->
+<script src="/__/firebase/init.js"></script>
+</body>
+</html>
